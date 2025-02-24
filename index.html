@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+        .controls {
+            margin-top: 10px;
+        }
+        input {
+            display: none;
+        }
+        label, button {
+            cursor: pointer;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            margin: 5px;
+        }
+        label:hover, button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <video id="videoPlayer" controls>
+            <source src="https://drive.google.com/file/d/1VSdOX2EJ_31Q5gcbZVLn8GYd7IiR6a-j/view?usp=sharing">
+            Your browser does not support the video tag.
+        </video>
+        <div class="controls">
+            <label for="fileInput">Upload Video</label>
+            <input type="file" id="fileInput" accept="video/*">
+            <button onclick="resetVideo()">Play Default</button>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const videoPlayer = document.getElementById("videoPlayer");
+        
+        fileInput.addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const videoURL = URL.createObjectURL(file);
+                videoPlayer.src = videoURL;
+            }
+        });
+        
+        function resetVideo() {
+            videoPlayer.src = "https://www.w3schools.com/html/mov_bbb.mp4";
+        }
+    </script>
+</body>
+</html>
